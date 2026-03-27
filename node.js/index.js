@@ -30,7 +30,10 @@ console.log('Db connected suceessfully'))
 .catch((err) => console.log(err))
 
 
-app.use(cors())
+app.use(cors({
+  origin: "https://macshopecom.netlify.app/",
+  methods: ["GET", "POST", "PUT", "DELETE"]
+}));
 app.use(express.json())
 app.use('/api/users', userRoute)
 app.use('/api/auth', AuthRoute)
