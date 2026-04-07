@@ -21,8 +21,8 @@ dotenv.config()
 // ── Mount routes ──────────────────────────────────────────────
 app.use(cors({
   origin: [
-    "https://bookie-hostel.netlify.app/",
-    "https://www.bookie-hostel.netlify.app/"
+    "https://bookie-hostel.netlify.app",
+    "https://www.bookie-hostel.netlify.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
