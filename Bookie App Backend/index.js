@@ -18,15 +18,13 @@ connectDB();
 
 dotenv.config()
 
-
-
-mongoose.connect(process.env.MONGO_URL)
-.then(()=>
-console.log('Db connected suceessfully'))
-.catch((err) => console.log(err))
-
 // ── Mount routes ──────────────────────────────────────────────
-app.use(cors());
+app.use(cors({
+  origin:[
+    "http://127.0.0.1:5501",
+    "http://https://bookie-app-r03w.onrender.com"
+  ]
+}));
 app.use(express.json());
 app.use("/api/users",      userRoutes);
 app.use("/api/admin",      adminRoutes);
