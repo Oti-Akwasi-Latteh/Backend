@@ -20,12 +20,19 @@ dotenv.config()
 
 // ── Mount routes ──────────────────────────────────────────────
 app.use(cors({
-  origin:[
-    "http://127.0.0.1:5501",
-    "http://https://bookie-app-r03w.onrender.com"
-  ]
+  origin: [
+    "https://bookie-hostel.netlify.app/",
+    "https://www.bookie-hostel.netlify.app/"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
+app.options("*", cors());
+
 app.use(express.json());
+
+
 app.use("/api/users",      userRoutes);
 app.use("/api/admin",      adminRoutes);
 app.use("/api/hostels",    hostelRoutes);
