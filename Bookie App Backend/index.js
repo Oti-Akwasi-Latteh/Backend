@@ -1,0 +1,42 @@
+// server.js
+const express    = require("express");
+const cors       = require("cors");
+const connectDB  = require("./config/db");
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+
+// ── Route files ──────────────────────────────────────────────
+const userRoutes       = require("./routes/Users");
+const adminRoutes      = require("./routes/Admin");
+const hostelRoutes     = require("./routes/Hostel");
+const roomRoutes       = require("./routes/Rooms");
+const studentRoutes    = require("./routes/Applications");
+const allocationRoutes = require("./routes/Hostel_Allocations");
+
+const app = express();
+connectDB();
+
+dotenv.config()
+
+
+
+mongoose.connect(process.env.MONGO_URL)
+.then(()=>
+console.log('Db connected suceessfully'))
+.catch((err) => console.log(err))
+
+// ── Mount routes ──────────────────────────────────────────────
+app.use(cors());
+app.use(express.json());
+app.use("/api/users",      userRoutes);
+app.use("/api/admin",      adminRoutes);
+app.use("/api/hostels",    hostelRoutes);
+app.use("/api/rooms",      roomRoutes);
+app.use("/api/students",   studentRoutes);
+app.use("/api/allocation", allocationRoutes);
+
+// ── Health check ──────────────────────────────────────────────
+app.get("/", (_req, res) => res.json({ status: "Bookie API running" }));
+
+const PORT = process.env.PORT || 9000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
