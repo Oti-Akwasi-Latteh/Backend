@@ -2,7 +2,6 @@
 const express    = require("express");
 const cors       = require("cors");
 const connectDB  = require("./config/db");
-const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 
 // ── Route files ──────────────────────────────────────────────
@@ -14,8 +13,6 @@ const studentRoutes    = require("./routes/Applications");
 const allocationRoutes = require("./routes/Hostel_Allocations");
 
 const app = express();
-connectDB();
-
 dotenv.config()
 
 // ── Mount routes ──────────────────────────────────────────────
@@ -31,6 +28,8 @@ app.use(cors({
 app.options("*", cors());
 
 app.use(express.json());
+
+connectDB();
 
 
 app.use("/api/users",      userRoutes);
